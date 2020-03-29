@@ -16,27 +16,6 @@
             android:layout_height="wrap_content"
             android:text="@string/functions_text"
             />
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/functions_text_1" />-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/functions_text_2"-->
-<!--            />-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/functions_text_3"-->
-<!--            />-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/functions_text_4"-->
-<!--            />-->
     </LinearLayout>
     <EditText
         android:id="@+id/calculator_input"
@@ -59,6 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorError"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         />
     <Button
         android:id="@+id/calculator_button"

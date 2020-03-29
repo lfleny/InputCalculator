@@ -19,7 +19,10 @@ import java.io.StringWriter;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String KEY_ERROR_MESSAGE = "error_message";
+    private static final String KEY_RESULT = "result";
     Double result = null;
+    String error_message = "";
     Calculator calc = new Calculator();
 
     @Override
@@ -27,6 +30,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button evaluateButton = findViewById(R.id.calculator_button);
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getString(KEY_ERROR_MESSAGE, "") != "") {
+                error_message = savedInstanceState.getString(KEY_ERROR_MESSAGE, "");
+                TextView errorTextView = findViewById(R.id.error_text);
+                errorTextView.setText(error_message);
+            }
+            if (savedInstanceState.getString(KEY_RESULT, null) != null) {
+                result = Double.parseDouble(savedInstanceState.getString(KEY_RESULT, null));
+                TextView answerTextView = findViewById(R.id.answer_text);
+                answerTextView.setText(result.toString());
+            }
+        }
 
         evaluateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,21 +55,24 @@ public class MainActivity extends AppCompatActivity {
                     result = calc.calculate(input);
                     TextView answerTextView = findViewById(R.id.answer_text);
                     answerTextView.setText(result.toString());
-                    InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                 } catch (UserInputException e) {
-                    errorTextView.setText(e.getMessage());
+                    error_message = e.getMessage();
+                    errorTextView.setText(error_message);
                 } catch (CalculateException e) {
-                    errorTextView.setText(e.getMessage());
+                    error_message = e.getMessage();
+                    errorTextView.setText(error_message);
                 } catch (Exception e) {
-                    StringWriter sw = new StringWriter();
-                    PrintWriter pw = new PrintWriter(sw);
-                    e.printStackTrace(pw);
-                    String sStackTrace = sw.toString(); // stack trace as a string
-                    Log.d("ERROR", sStackTrace);
-                    errorTextView.setText(sStackTrace);
+                    error_message = getString(R.string.error_global);
+                    errorTextView.setText(error_message);
                 }
             }
         });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString(KEY_ERROR_MESSAGE, error_message);
+        savedInstanceState.putString(KEY_RESULT, result.toString());
     }
 }
