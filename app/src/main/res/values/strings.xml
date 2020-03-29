@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Строковый калькулятор</string>
+    <string name="input_label">Введите выражение:</string>
+    <string name="evaluate_button">=</string>
+    <string name="error_global">Ошибка обработки выражения</string>
+    <string name="functions_text">Поддерживаемые функции: \n\nБинарные функции: +, -, ×, ÷ \nУнарные функции: - (минус) \nПроизвольная вложенность скобок \nПоддержка ввода дробных чисел</string>
+    <string name="functions_text_1">Бинарные функции: +, -, ×, ÷</string>
+    <string name="functions_text_2">Унарные функции: - (минус)</string>
+    <string name="functions_text_3">Произвольная вложенность скобок</string>
+    <string name="functions_text_4">Поддержка ввода дробных чисел</string>
+</resources>
